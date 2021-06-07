@@ -22,16 +22,21 @@ export default class Board {
         return this.state.every(cell => cell);
     }
 
+    // insert value in the board
     insert(symbol, position) {
+        // if position is out of index
         if(![0,1,2,3,4,5,6,7,8].includes(position)) {
             throw new Error('Cell index does not exist!')
         }
+        // if symbol is not 'x' nor 'o'
         if(!['x','o'].includes(symbol)) {
             throw new Error('The symbol can only be x or o!')
         }
+        // if there is already value
         if(this.state[position]) {
             return false;
         }
+        // if everything is ok write symbol in the board
         this.state[position] = symbol;
         return true;
     }
