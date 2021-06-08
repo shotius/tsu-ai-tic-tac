@@ -33,9 +33,11 @@ body {
     background: #fff;
     position: relative;
     cursor: pointer;
-    /* color: #fff; */
     font-size: calc(18px + 5vw);
     font-family: fantasy;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #board [class^="cell-"].x, #board [class^="cell-"].o {

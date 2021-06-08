@@ -12,15 +12,15 @@ function newGame(depth = -1, startingPlayer = 1) {
 	boardDIV.className = '';
     boardDIV.innerHTML = 
         `<div class="cells-wrap">
-            <button class="cell-0"></button>
-            <button class="cell-1"></button>
-            <button class="cell-2"></button>
-            <button class="cell-3"></button>
-            <button class="cell-4"></button>
-            <button class="cell-5"></button>
-            <button class="cell-6"></button>
-            <button class="cell-7"></button>
-            <button class="cell-8"></button>
+            <div class="cell-0"></div>
+            <div class="cell-1"></div>
+            <div class="cell-2"></div>
+            <div class="cell-3"></div>
+            <div class="cell-4"></div>
+            <div class="cell-5"></div>
+            <div class="cell-6"></div>
+            <div class="cell-7"></div>
+            <div class="cell-8"></div>
         </div>`;
 	//Storing HTML cells in an array
 	const htmlCells = [...boardDIV.querySelector('.cells-wrap').children];
