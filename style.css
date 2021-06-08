@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 body {
-    background-color: #0a0710;
+    background-color: aqua;
 }
 .container {
     max-width: 500px;
@@ -56,7 +56,7 @@ body {
 #board:after {
     content: '';
     position: absolute;
-    background-color: #c11dd4; 
+    background-color: red; 
     transition: 0.7s;
 }
 
@@ -125,4 +125,23 @@ body {
 }
 #board.fullLine[class^="d-counter"]:after {
     height: 140%;
+}
+
+#layout {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color:rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.controls {
+    background-color: black;
+    display: inline-block;
+    top: 40%;
+    left: 42%;
+    padding: 30px;
 }

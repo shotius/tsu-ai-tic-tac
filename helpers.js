@@ -24,5 +24,10 @@ export function drawWinningLine(statusObject) {
 	if(winner === 'draw') return;
 	const board = document.getElementById("board");
     addClass(board, `${direction.toLowerCase()}-${row || column || diagonal}`);
-    setTimeout(() => { addClass(board, 'fullLine'); }, 50);
+    setTimeout(() => { 
+        addClass(board, 'fullLine');
+       setTimeout(() => {
+        document.getElementById('layout').style.display = "flex"; 
+       },1000) 
+     }, 50);
 }

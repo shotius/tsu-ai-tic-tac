@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     newGame(depth, startingPlayer);
     //Start a new game with chosen options when new game button is clicked
 	document.getElementById("newGame").addEventListener('click', () => {
+        document.getElementById('layout').style.display = 'none'
 		const startingDIV = document.getElementById("starting");
 		const starting = startingDIV.options[startingDIV.selectedIndex].value;
 		const depthDIV = document.getElementById("depth");
