@@ -9,12 +9,7 @@ body {
     padding: 0 30px;
     margin: 100px auto;
 }
-.field {
-    margin-bottom: 20px;
-}
-.field label {
-    color: #black;
-}
+
 #board {
     width: 100%;
     padding-top: 100%;
@@ -156,4 +151,14 @@ body {
     color: white;
     font-weight: 900;
     margin-top: 8px;
+}
+.field {
+    margin-bottom: 20px;
+}
+.field label {
+    color: black;
+}
+select {
+    margin-left: 4px;
+    padding: 5px;
 }

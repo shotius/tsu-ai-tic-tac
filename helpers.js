@@ -21,8 +21,13 @@ export function removeClass(el, className) {
 export function drawWinningLine(statusObject) {
 	if(!statusObject) return;
 	const { winner, direction, row, column, diagonal } = statusObject;
-	if(winner === 'draw') return;
-	const board = document.getElementById("board");
+	if(winner === 'draw') {
+        setTimeout(() => {
+            document.getElementById('layout').style.display = "flex"; 
+           },500) 
+        return 0;
+    }
+    	const board = document.getElementById("board");
     addClass(board, `${direction.toLowerCase()}-${row || column || diagonal}`);
     setTimeout(() => { 
         addClass(board, 'fullLine');
