@@ -22,9 +22,7 @@ export function drawWinningLine(statusObject) {
 	if(!statusObject) return;
 	const { winner, direction, row, column, diagonal } = statusObject;
 	if(winner === 'draw') {
-        setTimeout(() => {
-            document.getElementById('layout').style.display = "flex"; 
-           },500) 
+        document.getElementById('layout').style.display = "flex"; 
         return 0;
     }
     	const board = document.getElementById("board");
@@ -33,6 +31,6 @@ export function drawWinningLine(statusObject) {
         addClass(board, 'fullLine');
        setTimeout(() => {
         document.getElementById('layout').style.display = "flex"; 
-       },1000) 
+       },650) 
      }, 50);
 }
