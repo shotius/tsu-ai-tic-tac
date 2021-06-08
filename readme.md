@@ -1,1 +1,1 @@
-### clone and run html in browser
+### clone repo and run inde.html file in the browser
