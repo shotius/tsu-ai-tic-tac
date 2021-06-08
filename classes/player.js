@@ -86,6 +86,7 @@ export default class Player {
             });
             //If it's the main call, return the index of the best move or a random index if multiple indices have the same value
             if (depth == 0) {
+                debugger
                 let returnValue;
                 if (typeof this.nodesMap.get(best) == "string") {
                     const arr = this.nodesMap.get(best).split(",");
@@ -98,6 +99,7 @@ export default class Player {
                 callback(returnValue);
                 return returnValue;
             }
+            
             //If not main call (recursive) return the heuristic value for next calculation
             return best;
         }
