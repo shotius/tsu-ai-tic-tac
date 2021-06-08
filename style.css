@@ -142,7 +142,7 @@ body {
 }
 
 #newGame {
-    margin-left: 49px;
+    margin-left: 54px;
     background: blue;
     border: none;
     padding: 10px;
@@ -157,8 +157,10 @@ body {
 }
 .field label {
     color: black;
+    font-weight: bold;
 }
 select {
     margin-left: 4px;
     padding: 5px;
+    /* font-weight: bold; */
 }
