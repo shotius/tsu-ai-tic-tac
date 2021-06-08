@@ -6,10 +6,10 @@ export default class Player {
         this.nodesMap = new Map();
     }
     getBestMove(board, maximizing = true, callback = () => {}, depth = 0) {
-        //clear nodesMap if the function is called for a new move
+        // გაასუფთავე nodesMap თუ ფუნქცია იძახება ახალი სვლისთვის
         if(depth == 0) this.nodesMap.clear();
         
-        //If the board state is a terminal one, return the heuristic value
+        // თუ დაფის მდგომარებოა დამამთავრებელია, დააბრუნეთ ევრისტიკური მნიშვნელობა
         if(board.isTerminal() || depth === this.maxDepth ) {
             if(board.isTerminal().winner === 'x') {
                 return 100 - depth;
@@ -19,27 +19,28 @@ export default class Player {
             return 0;
         }
         if(maximizing) {
-            //Initialize best to the lowest possible value
+            // მინუს უსასრულობად აღებული მნიშვნელობა
             let best = -100;
-            //Loop through all empty cells
+            // ყველა ცარიელი უჯრისთვის შესრულედება
             board.getAvailableMoves().forEach(index => {
-                //Initialize a new board with a copy of our current state 
+                // ახალი დაფის ინიციალიზაცია ჩვენი ამჟამინდელი მდგომარეობის ასლით
                 const child = new Board([...board.state]);
-                //Create a child node by inserting the maximizing symbol x into the current empty cell
+                // შექმნათ ბავშვის კვანძი მიმდინარე მაქსიმალურ სიმბოლოში x მაქსიმალური სიმბოლოს ჩასმით
                 child.insert('x', index);
-                //Recursively calling getBestMove this time with the new board and minimizing turn and incrementing the depth
+                // ამჯერად getBestMove რეკორულად გამოიძახება ახალი დაფით და მინიმიზაციით და გაზრდით სიღრმით
                 const nodeValue = this.getBestMove(child, false, callback, depth + 1);
-                //Updating best value
+                // საუკეთესო მნიშვნელობის განახლება
                 best = Math.max(best, nodeValue);
                 
-                //If it's the main function call, not a recursive one, map each heuristic value with it's moves indices
+                // თუ ეს არის მთავარი ფუნქციის გამოძახება და არაც რეკურსიული, ასახეთ თითოეული ევრისტიკური მნიშვნელობა მისი მოძრაობის ინდექსებით
                 if(depth == 0) {
-                    //Comma separated indices if multiple moves have the same heuristic value
+                    // მძიმით გამოყოფილი ინდექსები, თუ მრავალჯერადი სვლას აქვს იგივე ევრისტიკური მნიშვნელობა
                     const moves = this.nodesMap.has(nodeValue) ? `${this.nodesMap.get(nodeValue)},${index}` : index;
                     this.nodesMap.set(nodeValue, moves);
                 }
             });
             //If it's the main call, return the index of the best move or a random index if multiple indices have the same value
+            // თუ ეს არის მთავარი გამოძახება, დააბრუნეთ საუკეთესო ნაბიჯის ან შემთხვევითი ინდექსის, თუ მრავალ ინდექსს აქვს იგივე მნიშვნელობა
             if(depth == 0) {
                 let returnValue;
                 if(typeof this.nodesMap.get(best) == 'string') {
@@ -50,37 +51,38 @@ export default class Player {
                     returnValue = this.nodesMap.get(best);
                 }
                 //run a callback after calculation and return the index
+                // გაანგარიშების შემდეგ გამოძახე callback და დააბრუნეთ ინდექსი
                 callback(returnValue);
                 return returnValue;
             }
-            //If not main call (recursive) return the heuristic value for next calculation
+            // თუ არა მთავარი გამოძახება (რეკურსიული) დავაბრუნოთ ევრისტიკური მნიშვნელობა შემდეგი გაანგარიშებისთვის
             return best;
         }
 
         if(!maximizing) {
-			//Initialize best to the highest possible value
+			// ინიცირება საუკეთესო მაქსიმალურ მნიშვნელობამდე
 			let best = 100;
 			//Loop through all empty cells
 			board.getAvailableMoves().forEach(index => {
-				//Initialize a new board with a copy of our current state 
+				// ახალი დაფის ინიციალიზაცია ჩვენი ამჟამინდელი მდგომარეობის ასლით
                 const child = new Board([...board.state]);
 
-				//Create a child node by inserting the minimizing symbol o into the current empty cell
+				// შექმენით child კვანძი მიმდინარე ცარიელ უჯრედში მინიმიზაციის სიმბოლოს ჩასმით
 				child.insert('o', index);
 			
-				//Recursively calling getBestMove this time with the new board and maximizing turn and incrementing the depth
+				// ამჯერად getBestMove რეკორდულად გამოიძახება ახალი დაფით და მაქსიმიზაციით და გაზრდილი სიღმით
 				let nodeValue = this.getBestMove(child, true, callback, depth + 1);
-				//Updating best value
+				// საუკეთესო მნიშვნელობის განახლება
 				best = Math.min(best, nodeValue);
 				
-				//If it's the main function call, not a recursive one, map each heuristic value with it's moves indices
+				// თუ ეს არის მთავარი ფუნქციის გამოძახება და არა რეკურსიული, ასახეთ თითოეული ევრისტიკური მნიშვნელობა მისი მოძრაობის ინდექსებით
 				if(depth == 0) {
-					//Comma separated indices if multiple moves have the same heuristic value
+					// მძიმით გამოყოფილი ინდექსები, თუ მრავალჯერადი სვლას აქვს იგივე ევრისტიკური მნიშვნელობა
 					const moves = this.nodesMap.has(nodeValue) ? this.nodesMap.get(nodeValue) + ',' + index : index;
 					this.nodesMap.set(nodeValue, moves);
 				}
 			});
-			//If it's the main call, return the index of the best move or a random index if multiple indices have the same value
+			// თუ ეს არის მთავარი გამოძახება, დააბრუნეთ საუკეთესო ნაბიჯის ან შემთხვევითი ინდექსის, თუ მრავალ ინდექსს აქვს იგივე მნიშვნელობა
 			if(depth == 0) {
                 let returnValue;
 				if(typeof this.nodesMap.get(best) == 'string') {
@@ -90,11 +92,11 @@ export default class Player {
 				} else {
 					returnValue = this.nodesMap.get(best);
 				}
-				//run a callback after calculation and return the index
+				// გაანგარიშების შემდეგ აწარმოეთ გამოძახება და დააბრუნეთ ინდექსი
 				callback(returnValue);
 				return returnValue;
 			}
-			//If not main call (recursive) return the heuristic value for next calculation
+			// თუ არაა მთავარი გამოძახება (რეკურსიული) დავაბრუნოთ ევრისტიკური მნიშვნელობა შემდეგი გაანგარიშებისთვის
 			return best;
 		}
     }

@@ -16,8 +16,8 @@ export function removeClass(el, className) {
     }
 }
 
-//Helper function that takes the object returned from isTerminal() and adds a 
-//class to the board that will handle drawing the winning line's animation
+// დამხმარე ფუნქცია, რომელიც იღებს isTerminal () - დან დაბრუნებულ ობიექტს და ამატებს a
+// კლასი დაფაზე, რომელიც გაუმკლავდება გამარჯვებული ხაზის ანიმაციის ხატვას
 export function drawWinningLine(statusObject) {
 	if(!statusObject) return;
 	const { winner, direction, row, column, diagonal } = statusObject;
